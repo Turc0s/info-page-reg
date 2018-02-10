@@ -1,5 +1,11 @@
 <h4>Employee Form</h4>
 <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+  <input 
+  type="hidden" 
+  name="$key" 
+  #$key="ngModel" 
+  [(ngModel)]="_employeeService.selectedEmployee.$key">
+  
   <div class="form-group">
     <label>Name</label>
     <input 
