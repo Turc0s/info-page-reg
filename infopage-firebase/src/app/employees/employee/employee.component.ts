@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from "../shared/employee.service";
 import { NgForm } from '@angular/forms';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-employee',
@@ -9,14 +10,18 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private _employeeService: EmployeeService) { }
+  constructor(private _employeeService: EmployeeService,
+            private _toastrService: ToastrService) { }
 
   ngOnInit() {
+    this._employeeService.getData();
     this.resetForm();
   }
 
   onSubmit(employeeForm: NgForm) {
+    this._employeeService.insertEmployee(employeeForm.value);
     this.resetForm();
+    this._toastrService.success("Submitted Successfully", "Employee Register");
   }
 
   // ? -> make the parameter optional
